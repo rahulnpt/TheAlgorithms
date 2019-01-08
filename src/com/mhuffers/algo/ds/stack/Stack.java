@@ -1,4 +1,4 @@
-package com.mhuffers.algo.ds;
+package com.mhuffers.algo.ds.stack;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ public class Stack {
 	
 	private int STACK_ARRAY[] = new int[DEFAULT_SIZE];
 	
-	private static int CURRENT_INDEX=-1;
+	private static int top=-1;
 	
 	public Stack() {
 	}
@@ -18,24 +18,32 @@ public class Stack {
 	}
 	
 	public void push(int value) {
-		CURRENT_INDEX++;
-		if(CURRENT_INDEX < DEFAULT_SIZE) {
-			STACK_ARRAY[CURRENT_INDEX] = value;
+		top++;
+		if(top < DEFAULT_SIZE) {
+			STACK_ARRAY[top] = value;
 		}else {
 			STACK_ARRAY = Arrays.copyOf(STACK_ARRAY, length()+10);
-			STACK_ARRAY[CURRENT_INDEX] = value;
+			STACK_ARRAY[top] = value;
 			DEFAULT_SIZE = STACK_ARRAY.length;
 		}
 	}
 
 	public int pop() {
-		int curr_val = STACK_ARRAY[CURRENT_INDEX];
-		CURRENT_INDEX--;
+		int curr_val = STACK_ARRAY[top];
+		top--;
 		return curr_val;
 	}
 	
+	public boolean isEmpty() {
+		return top == -1;
+	}
+	
+	public int peak() {
+		return STACK_ARRAY[top];
+	}
+	
 	public int length() {
-		return CURRENT_INDEX+1;
+		return top+1;
 	}
 	
 }
